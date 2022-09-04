@@ -14,9 +14,12 @@ import dbus
 import dbus.service
 import dbus.mainloop.glib
 try:
-    from gi.repository import GObject
+    from gi.repository import GLib
 except ImportError:
-    import gobject as GObject
+    try:
+        from gi.repository import GObject as GLib
+    except ImportError:
+        import gobject as GLib
 import bluezutils
 import RPi.GPIO as GPIO
 
@@ -81,6 +84,7 @@ def set_adapter_name(path, name):
     print("Adapter name set to: %s" % curr_name)
     return True
 
+
 class Rejected(dbus.DBusException):
     _dbus_error_name = "org.bluez.Error.Rejected"
 
@@ -124,11 +128,11 @@ class Agent(dbus.service.Object):
         self.allow_connect = True
         # Cancel the last timeout if it exists
         if self.last_timeout:
-            GObject.source_remove(self.last_timeout)
+            GLib.source_remove(self.last_timeout)
             print("Cancelled last timeout")
             self.last_timeout = None
         # Set a new timeout
-        self.last_timeout = GObject.timeout_add_seconds(
+        self.last_timeout = GLib.timeout_add_seconds(
             CONNECTION_TIMEOUT,
             self.reset_allow_connect
         )
@@ -241,7 +245,7 @@ if __name__ == '__main__':
     path = "/test/agent"
     agent = Agent(bus, path)
 
-    mainloop = GObject.MainLoop()
+    mainloop = GLib.MainLoop()
 
     obj = bus.get_object(BUS_NAME, "/org/bluez")
     manager = dbus.Interface(obj, "org.bluez.AgentManager1")
