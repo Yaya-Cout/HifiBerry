@@ -1,0 +1,22 @@
+[Unit]
+Description=HifiBerry daemon
+After=bluetooth.service
+
+[Service]
+Type=simple
+
+User=pi
+Group=pi
+UMask=007
+
+# Change this to the path of your script
+ExecStart=/home/pi/HifiBerry/hifiberry.py
+
+Restart=on-failure
+
+# Configures the time to wait before service is stopped forcefully.
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target
+
