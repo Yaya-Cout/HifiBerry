@@ -2,11 +2,11 @@
 
 ## Introduction
 
-HifiBerry is a simple script to make a Raspberry pi a bluetooth sink.
+HifiBerry is a simple script to make a Raspberry PI a bluetooth sink.
 
 ## Installation
 
-Installation is in three parts: first, install all dependencies, configure permissions, pulseaudio and bluetooth. Second, plug the button to the pin 18 (GPIO 24). Third, install HifiBerry to handle devices connects.
+Installation is in three parts: first, install all dependencies, configure permissions, PulseAudio and Bluetooth. Second, plug the button to the pin 18 (GPIO 24). Third, install HifiBerry to handle devices connects.
 
 ### Global config
 
@@ -26,7 +26,7 @@ sudo gpasswd -a pi audio
 sudo gpasswd -a pulse audio
 ```
 
-Setup pulseaudio and bluetooth device class
+Setup PulseAudio and Bluetooth device class
 
 ```bash
 sudo sh -c "echo 'extra-arguments = --exit-idle-time=-1 --log-target=syslog' >> /etc/pulse/client.conf"
@@ -98,7 +98,7 @@ If you have an error like this:
 E: [pulseaudio] module-bluetooth-policy.c: Failed to get transport: org.bluez.Error.Failed (Operation failed)
 ```
 
-You may need to change the bluetooth device class. To do so, run
+You may need to change the Bluetooth device class. To do so, run
 
 ```bash
 sudo hciconfig hci0 class 0x200420
@@ -123,7 +123,7 @@ sudo apt install python3-rpi.gpio
 
 ### Useful links
 
-- [Pinout.xyz](https://fr.pinout.xyz/) to find the pinout of the Raspberry pi
+- [Pinout.xyz](https://fr.pinout.xyz/) to find the pinout of the Raspberry PI
 - [TheCodeNinja](https://thecodeninja.net/2016/06/bluetooth-audio-receiver-a2dp-sink-with-raspberry-pi/) for the original config
 - [BlueZ test scripts](https://github.com/bluez/bluez/tree/master/test) for the `bluezutils.py`, `simple-agent.py` and other examples of scripts
 
