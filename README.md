@@ -13,7 +13,7 @@ Installation is in three parts: first, install all dependencies, configure permi
 Install dependencies
 
 ```bash
-sudo apt install bluez-test-scripts python3-rpi.gpio pulseaudio-module-bluetooth bluez-tools
+sudo apt install bluez-test-scripts python3-rpi.gpio pulseaudio-module-bluetooth bluez-tools python3-dbus
 ```
 
 Add users to groups
