@@ -126,9 +126,3 @@ sudo apt install python3-rpi.gpio
 - [Pinout.xyz](https://fr.pinout.xyz/) to find the pinout of the Raspberry PI
 - [TheCodeNinja](https://thecodeninja.net/2016/06/bluetooth-audio-receiver-a2dp-sink-with-raspberry-pi/) for the original config
 - [BlueZ test scripts](https://github.com/bluez/bluez/tree/master/test) for the `bluezutils.py`, `simple-agent.py` and other examples of scripts
-
-## Changelog
-
-### 1.0.0
-
-- Initial release
