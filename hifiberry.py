@@ -132,10 +132,7 @@ class Agent(dbus.service.Object):
             CONNECTION_TIMEOUT,
             self.reset_allow_connect
         )
-        if pin:
-            print(f"Temporary allow connect with pin {pin}")
-        else:
-            print("Temporary allow connect")
+        print("Temporary allow connect for %d seconds" % CONNECTION_TIMEOUT)
 
     def reset_allow_connect(self):
         self.allow_connect = False
