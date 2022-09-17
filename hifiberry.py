@@ -85,6 +85,37 @@ def set_adapter_name(path, name):
     return True
 
 
+def set_discoverable(path):
+    proxy = bus.get_object("org.bluez", path)
+    property_manager = dbus.Interface(proxy, "org.freedesktop.DBus.Properties")
+    property_manager.Set("org.bluez.Adapter1", "Discoverable", True)
+    # Wait for the change to take effect
+    poll_start = time.time()
+    while not property_manager.Get("org.bluez.Adapter1", "Discoverable") and time.time():
+        if time.time() - poll_start > 5:
+            print("Failed to set adapter discoverable")
+            return False
+        time.sleep(0.1)
+
+    print("Adapter is discoverable")
+    return True
+
+def set_discoverable_timeout(path, timeout):
+    proxy = bus.get_object("org.bluez", path)
+    property_manager = dbus.Interface(proxy, "org.freedesktop.DBus.Properties")
+    property_manager.Set("org.bluez.Adapter1", "DiscoverableTimeout", timeout)
+    # Wait for the change to take effect
+    poll_start = time.time()
+    while property_manager.Get("org.bluez.Adapter1", "DiscoverableTimeout") != timeout and time.time():
+        if time.time() - poll_start > 5:
+            print("Failed to set adapter discoverable timeout")
+            return False
+        time.sleep(0.1)
+
+    print("Adapter discoverable timeout set to: %d" % timeout)
+    return True
+
+
 class Rejected(dbus.DBusException):
     _dbus_error_name = "org.bluez.Error.Rejected"
 
@@ -271,6 +302,9 @@ if __name__ == '__main__':
 
     # Set the adapter name
     set_adapter_name("/org/bluez/hci0", ADAPTER_NAME)
+    # Set the adapter discoverable with no timeout
+    set_discoverable("/org/bluez/hci0")
+    set_discoverable_timeout("/org/bluez/hci0", 0)
 
     # Setup the GPIO pin
     GPIO.setmode(GPIO.BOARD)
