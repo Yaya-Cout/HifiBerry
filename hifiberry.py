@@ -304,7 +304,7 @@ if __name__ == '__main__':
     set_adapter_name("/org/bluez/hci0", ADAPTER_NAME)
     # Set the adapter discoverable with no timeout
     set_discoverable("/org/bluez/hci0")
-    set_discoverable_timeout("/org/bluez/hci0", 0)
+    # set_discoverable_timeout("/org/bluez/hci0", 0)  # TODO: Fix this
 
     # Setup the GPIO pin
     GPIO.setmode(GPIO.BOARD)
