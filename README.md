@@ -62,16 +62,16 @@ Copy or link the service file to the systemd directory.
 
 ```bash
 # Yoy can choose to copy or link the file, I prefer to link it, but it's less secure, so I recommand to copy it
-sudo cp bluetooth-sink.service /etc/systemd/system/ # To copy the service file (recommended)
-sudo ln bluetooth-sink.service /etc/systemd/system/hifiberry.service # To create a symlink (if you want to edit the service file, it's less secure if you set the wrong permissions to the original file, as the service can ask for root permissions)
+sudo cp hifiberry.service /etc/systemd/system/ # To copy the service file (recommended)
+sudo ln hifiberry.service /etc/systemd/system/hifiberry.service # To create a symlink (if you want to edit the service file, it's less secure if you set the wrong permissions to the original file, as the service can ask for root permissions)
 ```
 
 Then, enable and start the service.
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable bluetooth-sink.service
-sudo systemctl start bluetooth-sink.service
+sudo systemctl enable hifiberry.service
+sudo systemctl start hifiberry.service
 ```
 
 To disable the service, run
